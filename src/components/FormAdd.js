@@ -1,15 +1,19 @@
 import Data from './../services/Data';
+import { useRef } from 'react';
 
 const FormAdd = (props) => {
+  const input_add_ref = useRef(null);
+
   return (
     <form onSubmit = {(event) => {
       event.preventDefault();
-      const counter_value = document.getElementById("counter-value").value;
-      props.onAdd(event, counter_value);
+      props.onAdd(event, input_add_ref.current.value);
+      input_add_ref.current.value = '';
+      input_add_ref.current.focus();
     }}>
       <label className='form-label'>
         Valeur initiale :
-        <input type="text" className='form-control' id="counter-value" />
+        <input ref={input_add_ref} type="number" className='form-control' id="counter-value" />
       </label>
       <input type="submit" value="Créer" className='btn btn-success ms-3'/>
     </form>

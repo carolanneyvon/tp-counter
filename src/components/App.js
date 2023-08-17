@@ -58,17 +58,25 @@ function App() {
     event.preventDefault();
     console.log(`Dans handleSubmit`);
     // Ajout d'un compteur en faisant appel à l'api rest
-    Data.addCounters(counter_value);
+    await Data.addCounters(counter_value);
     // Pour afficher, on peut simplement demander au service de recharger les données
     const loaded_counters = await Data.loadCounters();
     setCounters(loaded_counters);
   }
+
+  // Supprimer un compteur
+  const deleteCounter = async (id) => {
+    await Data.deleteCounter(id); // Supprime le compteur 
+    const updated_counters = counters.filter((counter) => counter.id !== id); // Affiche la nouvelle liste des compteurs
+    setCounters(updated_counters);
+  };
 
   return (
     <div className="App container">
       <h1 className='pb-3'>Compteur</h1>
       <h2>Créer un compteur</h2>
       <FormAdd onAdd={handleSubmitAdd}/>
+      <h2>Gérer les compteurs</h2>
       <button
         onClick={decrementAll}
         className="btn btn-warning me-3">Decrémenter
@@ -84,6 +92,7 @@ function App() {
           counter={counter}
           onIncrement={increment}
           onDecrement={decrement}
+          onDelete={deleteCounter}
         />)}
     </div>
   );

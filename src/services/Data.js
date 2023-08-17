@@ -33,7 +33,22 @@ export default class Data {
       return response.json();
     })
     .catch(error => {
-      console.error(`Erreur attrapée dans le loadCounters : `, error);
+      console.error(`Erreur attrapée dans le addCounters : `, error);
     })
   }
+
+  static async deleteCounter(id) {
+    // Pour rappel la fonction fetch retourne une promesse
+    return fetch(this.url + "/" + id,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "DELETE"
+      })
+      .then((res) => { console.log(res) })
+      .catch((error) => { console.error(error) })
+  }
+
 }
