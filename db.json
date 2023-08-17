@@ -1,7 +1,28 @@
 {
   "counters": [
-    { "id": 1, "value": 0 },
-    { "id": 2, "value": 1 },
-    { "id": 3, "value": 2 }
+    {
+      "id": 1,
+      "value": 0
+    },
+    {
+      "id": 2,
+      "value": 1
+    },
+    {
+      "id": 3,
+      "value": 2
+    },
+    {
+      "value": 100,
+      "id": 4
+    },
+    {
+      "value": 100,
+      "id": 5
+    },
+    {
+      "value": 100,
+      "id": 6
+    }
   ]
 }
