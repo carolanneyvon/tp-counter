@@ -14,8 +14,9 @@ function App() {
     console.log(`Dans useEffect`);
     // Appel du service Data
     (async () => {
-      setCounters(await Data.loadCounters())
-      console.log(`counters : `, counters);
+      const loaded_counters = await Data.loadCounters();
+      console.log(`counters dans useEffect : `, loaded_counters);
+      setCounters(loaded_counters);
     })();
   }, []);
 
@@ -53,20 +54,21 @@ function App() {
   }
 
   // Gestion de l'ajout d'un compteur
-  const handleSubmitAdd = (event) => {
+  const handleSubmitAdd = async (event, counter_value) => {
     event.preventDefault();
     console.log(`Dans handleSubmit`);
     // Ajout d'un compteur en faisant appel à l'api rest
-    Data.addCounters();
+    Data.addCounters(counter_value);
+    // Pour afficher, on peut simplement demander au service de recharger les données
+    const loaded_counters = await Data.loadCounters();
+    setCounters(loaded_counters);
   }
 
   return (
     <div className="App container">
       <h1 className='pb-3'>Compteur</h1>
       <h2>Créer un compteur</h2>
-      <FormAdd onAdd={(event) => {
-        handleSubmitAdd(event);
-      }}/>
+      <FormAdd onAdd={handleSubmitAdd}/>
       <button
         onClick={decrementAll}
         className="btn btn-warning me-3">Decrémenter

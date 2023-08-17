@@ -17,7 +17,7 @@ export default class Data {
     })
   }
 
-  static async addCounters() {
+  static async addCounters(intial_value = 0) {
     // La fonction fetch retourne une promesse (donc asynchrone)
     return fetch(this.url,
       {
@@ -26,7 +26,7 @@ export default class Data {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ "value": 100 })
+        body: JSON.stringify({ "value": intial_value })
       })
     .then(response => {
       console.log(`Response status : `, response.status);
